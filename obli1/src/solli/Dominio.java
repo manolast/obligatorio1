@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package dominio;
+package solli;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -26,6 +27,12 @@ public class Dominio {
         public char getSymbol() {
             return symbol;
         }
+        public void setSymbol(char newSymbol) {
+            this.symbol = newSymbol;
+        }
+        public void setColor(Boolean newColor) {
+            this.color = newColor;
+        }
 
         public Boolean getColor() {
             return color;
@@ -34,17 +41,21 @@ public class Dominio {
     
 public class Juego {
     private Bar[][] tablero;
-    private int filas;
-    private int columnas
     private int level;
-    private int totalMoves;
-    //dependiendo de como se comienza el juego, si la fuente es al azar, txt o predet
-    private String fuente;
+    private ArrayList<int[]> movimientosInicial;
+    private ArrayList<int[]> movimientos;
 
+    
+    //constructor con 3 params genera aleatorio por nivel
     public Juego(int rows, int columns, int level) {
         this.level = level;
-        this.totalMoves = 0;
-        initializeBoard();
+        Random random = new Random();
+        boolean randomBoolean = random.nextBoolean();
+        //devuelve un tablero todo de un mismo color, con barras random
+        this.tablero = generarTableroRandom(rows, columns, level, randomBoolean);
+        //se "dessoluciona" el tablero y se devuelve la solucion
+        this.movimientosInicial = desSolucionar(this.tablero, level);
+        
     }
     
     public Juego(){
@@ -55,7 +66,55 @@ public class Juego {
         this.tablero = generarTableroPredet();
         
     }
-    
+    public void agregarMovimiento(int x, int y) {
+        int[] coordenadas = {x, y};
+        movimientos.add(coordenadas);
+    }
+    private Bar[][] generarTableroRandom(int filas, int columnas, int nivel, boolean color){
+        Bar[][] matriz = new Bar[5][6];
+        for(int i = 0; i< filas; i++){
+            for(int j = 0; j< columnas; j++){
+                char barraRand = generarBarraRandom();
+                matriz[i][j].setSymbol(barraRand);
+                matriz[i][j].setColor(color);
+            }
+        }
+        return matriz;
+    }
+    private char generarBarraRandom(){
+        char ret = 'd';
+        Random random = new Random();
+        int opcion = random.nextInt(4) + 1;
+        switch(opcion){
+            case 1:
+                ret = '\\';
+                break;
+            case 2:
+                ret = '/';
+                break;
+            case 3:
+                ret = '|';
+                break;
+            case 4:
+                ret = '-';
+                break;
+            default:
+                ret = '-';
+                break;                
+        }
+        return ret;
+    }
+    private Bar[][] desSolucionar(Bar[][] inicial, int nivel){
+        ArrayList<int[]> lista = new ArrayList<>();
+        Random random = new Random();
+        int filas = inicial.length;
+        int columnas = inicial[0].length;
+
+        for(int i = 0; i< nivel; i++){
+            int opcionFilas = random.nextInt(filas - 1);
+            int opcionColumna = random.nextInt(columnas - 1);
+        }
+    }
     private Bar[][] generarTableroPredet(){
         Bar[][] matriz = new Bar[5][6];
         
