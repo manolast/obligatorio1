@@ -7,7 +7,7 @@ package solli;
 import java.util.*;
 
 public class Dominio {
-    public class Bar {
+    public static class Bar {
         private char symbol;
         //si es azul, color = True, si rojo = False
         private Boolean color;
@@ -31,7 +31,7 @@ public class Dominio {
             return color;
         }
     }
-    public class Juego {
+    public static class Juego {
         private Bar[][] tablero;
         private int level;
         private ArrayList<int[]> movimientosInicial;
@@ -46,7 +46,7 @@ public class Dominio {
             //devuelve un tablero todo de un mismo color, con barras random
             this.tablero = generarTableroRandom(rows, columns, level, randomBoolean);
             //se "dessoluciona" el tablero y se devuelve la solucion
-            desSolucionar(level);
+//            desSolucionar(level);
 
         }
 
@@ -59,13 +59,43 @@ public class Dominio {
             int[] coordenadas = {x, y};
             movimientos.add(coordenadas);
         }
+        private boolean esCoordenadaValida(int x, int y) {
+            return x >= 0 && x < tablero.length && y >= 0 && y < tablero[0].length;
+        }
+        public String hacerCambiosTablero(int x, int y){
+            String ret = "";
+            if(!esCoordenadaValida(x, y)){
+                ret = "Coordenada no valida, ingrese una valida";
+            }else{
+                char barra = tablero[x][y].getSymbol();
+                switch(barra){
+                    case '\\':
+                        ret = "es una \\";
+                        break;
+                    case '/':
+                        ret = "es una /";
+                        break;
+                    case '|':
+                        ret = "es una |";
+                        break;
+                    case '-':
+                        ret = "es una -";
+                        break;
+                    default:
+                        ret = "que carajo paso";
+                        break;                
+                }
+                
+            }
+            return ret;
+        }
         private Bar[][] generarTableroRandom(int filas, int columnas, int nivel, boolean color){
-            Bar[][] matriz = new Bar[5][6];
+            Bar[][] matriz = new Bar[filas][columnas];
             for(int i = 0; i< filas; i++){
                 for(int j = 0; j< columnas; j++){
                     char barraRand = generarBarraRandom();
-                    matriz[i][j].setSymbol(barraRand);
-                    matriz[i][j].setColor(color);
+                    Bar bar = new Bar(barraRand, color);
+                    matriz[i][j] = bar;
                 }
             }
             return matriz;

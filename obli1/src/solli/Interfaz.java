@@ -5,8 +5,30 @@
 package solli;
 
 import java.util.Scanner;
+import solli.Dominio.*;
 
 public class Interfaz {
+    
+    public static void jugarAzar(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("ingrese filas");
+        int filas = in.nextInt();
+        System.out.println("ingrese columnas");
+        int columnas = in.nextInt();
+        System.out.println("ingrese nivel");
+        int nivel = in.nextInt();
+        
+        Juego juego = new Juego(filas, columnas, nivel);
+        for (int i = 0; i < 4; i++) {
+            System.out.println("ingrese movimiento");
+            int x = in.nextInt();
+            int y = in.nextInt();
+            String resp = juego.hacerCambiosTablero(x,y);
+            System.out.println(resp);
+            
+        }
+        
+    }
     
     public static void start() { // Changed from non-static to static
         Scanner in = new Scanner(System.in);
@@ -43,7 +65,7 @@ public class Interfaz {
                 // Call jugarPredefinido() or implement this method
                 break;
             case "c":
-                // Call jugarAzar() or implement this method
+                jugarAzar();
                 break;
             default:
                 System.out.println("Opcion no valida. Inserte opcion valida");
