@@ -4,14 +4,11 @@
  */
 package solli;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+public static void main(){
+    
+}
 
-/**
- *
- * @author manue
- */
 public class Dominio {
     
     public class Bar {
