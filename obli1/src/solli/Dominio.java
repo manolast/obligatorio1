@@ -5,10 +5,6 @@
 package solli;
 
 import java.util.*;
-public static void main(){
-    
-}
-
 public class Dominio {
     
     public class Bar {
