@@ -95,9 +95,11 @@ public class Dominio {
                         break;
                     case '|':
                         ret = "es una |";
+                        hacerMovimientoRecta(x, y);
                         break;
                     case '-':
                         ret = "es una -";
+                        hacerMovimientoGuion(x, y);
                         break;
                     default:
                         ret = "que carajo paso";
@@ -146,6 +148,38 @@ public class Dominio {
                 valida = this.esCoordenadaValida(i + 1, col);
             }
         }
+        public void hacerMovimientoRecta(int x, int y){
+            //primero voy para arriba, luego abajo
+            boolean valida = true;
+            int col = y;
+            //for para ir para arriba
+            for(int i = x; i>=0 && valida; i--){
+                this.tablero[i][col].invertirColor();
+                valida = this.esCoordenadaValida(i - 1, col);
+            }
+            valida = this.esCoordenadaValida(x+1, col);
+            //for para ir hacia abajo
+            for(int i = x+1; i<this.tablero.length && valida; i++){
+                this.tablero[i][col].invertirColor();
+                valida = this.esCoordenadaValida(i + 1, col);
+            }
+        }
+        public void hacerMovimientoGuion(int x, int y){
+            //primero voy para izquierda, luego derecha
+            boolean valida = true;
+            int fila = x;
+            //for para ir a la izquierda
+            for(int i = y; i>=0 && valida; i--){
+                this.tablero[fila][i].invertirColor();
+                valida = this.esCoordenadaValida(fila, i - 1);
+            }
+            valida = this.esCoordenadaValida(fila, y + 1);
+            //for para ir a la derecha
+            for(int i = y+1; i<this.tablero[0].length && valida; i++){
+                this.tablero[fila][i].invertirColor();
+                valida = this.esCoordenadaValida(fila, i + 1);
+            }
+        }        
         private Bar[][] generarTableroRandom(int filas, int columnas, int nivel, boolean color){
             Bar[][] matriz = new Bar[filas][columnas];
             for(int i = 0; i< filas; i++){
