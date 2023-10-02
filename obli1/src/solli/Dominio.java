@@ -61,8 +61,8 @@ public class Dominio {
             boolean randomBoolean = random.nextBoolean();
             //devuelve un tablero todo de un mismo color, con barras random
             this.tablero = generarTableroRandom(rows, columns, level, randomBoolean);
-            //se "dessoluciona" el tablero y se devuelve la solucion
-//            desSolucionar(level);
+            this.movimientosInicial = new ArrayList<int[]>();
+            desSolucionar(level);
 
         }
 
@@ -221,7 +221,7 @@ public class Dominio {
             for(int i = 0; i< nivel; i++){
                 int opcionFilas = random.nextInt(filas - 1);
                 int opcionColumna = random.nextInt(columnas - 1);
-                //falta modificar el tablero acorde
+                hacerCambiosTablero(opcionFilas, opcionColumna);
                 int[] movimiento = {opcionFilas, opcionColumna};
                 this.movimientosInicial.add(movimiento);
             }

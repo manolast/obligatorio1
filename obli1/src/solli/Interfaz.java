@@ -30,8 +30,6 @@ public class Interfaz {
             String resp = juego.hacerCambiosTablero(x,y);
             System.out.println(resp);
             System.out.println(juego.toString());
-
-            
         }
     }
     public static void start() {
