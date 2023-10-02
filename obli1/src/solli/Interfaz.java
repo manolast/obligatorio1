@@ -13,8 +13,16 @@ public class Interfaz {
         int columnas = in.nextInt();
         System.out.println("ingrese nivel");
         int nivel = in.nextInt();
-        
+    
         Juego juego = new Juego(filas, columnas, nivel);
+        empezarJuego(juego);
+
+        
+    }
+    public static void empezarJuego(Juego juego){
+        System.out.print(juego.toString());
+        Scanner in = new Scanner(System.in);
+
         for (int i = 0; i < 4; i++) {
             System.out.println("ingrese movimiento");
             int x = in.nextInt();
@@ -25,14 +33,12 @@ public class Interfaz {
 
             
         }
-        
     }
-    
-    public static void start() { // Changed from non-static to static
+    public static void start() {
         Scanner in = new Scanner(System.in);
         System.out.println("Desea jugar? (y/n)");
         String answer = in.nextLine();
-        answer = answer.toUpperCase(); // Corrected the assignment of the uppercase value
+        answer = answer.toUpperCase();
         switch(answer){
             case "Y":
                 imprimirMenu();
@@ -42,7 +48,7 @@ public class Interfaz {
                 break;
             default:
                 System.out.println("Opcion no valida. Inserte opcion valida");
-                start(); // Recursive call to start() method
+                start();
                 break;
         }
     }

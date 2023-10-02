@@ -91,6 +91,7 @@ public class Dominio {
                         break;
                     case '/':
                         ret = "es una /";
+                        hacerMovimientoFrontslash(x, y);
                         break;
                     case '|':
                         ret = "es una |";
@@ -122,6 +123,26 @@ public class Dominio {
             for(int i = x+1; i<this.tablero.length && valida; i++){
                 this.tablero[i][col].invertirColor();
                 col ++;
+                valida = this.esCoordenadaValida(i + 1, col);
+            }
+        }
+
+        public void hacerMovimientoFrontslash(int x, int y){
+            //primero voy diagonal para arriba, luego diagonal para abajo
+            boolean valida = true;
+            int col = y;
+            //for para ir en diagonal hacia arriba
+            for(int i = x; i>=0 && valida; i--){
+                this.tablero[i][col].invertirColor();
+                col ++;
+                valida = this.esCoordenadaValida(i - 1, col);
+            }
+            col = y-1;
+            valida = this.esCoordenadaValida(x+1, col);
+            //for para ir en diagonal hacia abajo
+            for(int i = x+1; i<this.tablero.length && valida; i++){
+                this.tablero[i][col].invertirColor();
+                col --;
                 valida = this.esCoordenadaValida(i + 1, col);
             }
         }
@@ -214,11 +235,19 @@ public class Dominio {
         @Override
         public String toString(){
             String ret = "";
-            for(int i = 0; i< this.tablero.length; i++){
-                for(int j = 0; j< this.tablero[0].length; j++){
-                    String barString = this.tablero[i][j].toString();
-                    ret += barString;
+            int numColumnas = this.tablero[0].length;
+            for(int i = 0; i< (this.tablero.length*2)+1; i++){
+                if(i%2 == 0){
+                    String lineas = "+---".repeat(numColumnas) + "+";
+                    ret += lineas;
+                }else{
+                    for(int j = 0; j< this.tablero[0].length; j++){
+                        String barString = this.tablero[(i-1)/2][j].toString();
+                        ret += "| "+ barString+ " ";
+                    }
+                    ret += "|";
                 }
+
                 ret += '\n';
             }
             return ret;
