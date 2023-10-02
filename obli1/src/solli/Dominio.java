@@ -5,7 +5,6 @@
 package solli;
 
 import java.util.*;
-
 public class Dominio {
     public static class Bar {
         private char symbol;
@@ -149,32 +148,46 @@ public class Dominio {
                 this.movimientosInicial.add(movimiento);
             }
         }
-//        private Bar generarTableroPredet(){
-//            Bar[][] matriz = new Bar[5][6];
-//
-//            matriz[0][0] = new Bar('\\', true);
-//            matriz[0][1] = new Bar('/', false);
-//            matriz[0][2] = new Bar('|', false);
-//            matriz[0][3] = new Bar('\\', true); 
-//            matriz[0][4] = new Bar('\\', false);
-//            matriz[0][5] = new Bar('/', false);
-//
-//            matriz[1][0] = new Bar('-', false);
-//            matriz[1][1] = new Bar('\\', true);
-//            matriz[1][2] = new Bar('\\', false);
-//            matriz[1][3] = new Bar('\\', true); 
-//            matriz[1][4] = new Bar('|', false);
-//            matriz[1][5] = new Bar('-', false);
-//
-//            matriz[2][0] = new Bar('-', false);
-//            matriz[2][1] = new Bar('\\', true);
-//            matriz[2][2] = new Bar('\\', false);
-//            matriz[2][3] = new Bar('\\', true); 
-//            matriz[2][4] = new Bar('|', false);
-//            matriz[2][5] = new Bar('-', false);
-//            
-//        }
-        
+       private Bar generarTableroPredet(){
+            Bar[][] matriz = new Bar[5][6];
+
+            matriz[0][0] = new Bar('|', true);
+            matriz[0][1] = new Bar('|', true);
+            matriz[0][2] = new Bar('-', false);
+            matriz[0][3] = new Bar('/', true); 
+            matriz[0][4] = new Bar('|', false);
+            matriz[0][5] = new Bar('-', false);
+
+            matriz[1][0] = new Bar('-', false);
+            matriz[1][1] = new Bar('/', true);
+            matriz[1][2] = new Bar('/', true);
+            matriz[1][3] = new Bar('|', true); 
+            matriz[1][4] = new Bar('-', false);
+            matriz[1][5] = new Bar('-', false);
+
+            matriz[2][0] = new Bar('-', false);
+            matriz[2][1] = new Bar('-', false);
+            matriz[2][2] = new Bar('|', true);
+            matriz[2][3] = new Bar('-', false); 
+            matriz[2][4] = new Bar('/', false);
+            matriz[2][5] = new Bar('-', false);
+            
+            matriz[3][0] = new Bar('\\', false);
+            matriz[3][1] = new Bar('-', false);
+            matriz[3][2] = new Bar('|', false);
+            matriz[3][3] = new Bar('\\', false); 
+            matriz[3][4] = new Bar('|', true);
+            matriz[3][5] = new Bar('|', false);
+            
+            matriz[4][0] = new Bar('\\', false);
+            matriz[4][1] = new Bar('/', false);
+            matriz[4][2] = new Bar('/', false);
+            matriz[4][3] = new Bar('|', true); 
+            matriz[4][4] = new Bar('/', true);
+            matriz[4][5] = new Bar('\\', true);
+            
+            
+        }      
     }
     
 }
