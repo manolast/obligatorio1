@@ -86,7 +86,7 @@ public class Dominio {
                 char barra = tablero[x][y].getSymbol();
                 switch(barra){
                     case '\\':
-                        ret = "es una \\";
+                        ret = "es una c \\";
                         hacerMovimientoBackslash(x,y);
                         break;
                     case '/':

@@ -27,7 +27,7 @@ public class Interfaz {
             System.out.println("ingrese movimiento");
             int x = in.nextInt();
             int y = in.nextInt();
-            String resp = juego.hacerCambiosTablero(x,y);
+            String resp = juego.hacerCambiosTablero(x-1,y-1);
             System.out.println(resp);
             System.out.println(juego.toString());
 
