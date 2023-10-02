@@ -30,6 +30,10 @@ public class Dominio {
         public Boolean getColor() {
             return color;
         }
+        public void invertirColor(){
+            boolean color = this.getColor();
+            this.setColor(!color);
+        }
     }
     public static class Juego {
         private Bar[][] tablero;
@@ -71,6 +75,7 @@ public class Dominio {
                 switch(barra){
                     case '\\':
                         ret = "es una \\";
+                        hacerMovimientoBackslash(x,y);
                         break;
                     case '/':
                         ret = "es una /";
@@ -88,6 +93,15 @@ public class Dominio {
                 
             }
             return ret;
+        }
+        public void hacerMovimientoBackslash(int x, int y){
+            //primero voy diagonal para arriba, luego diagonal para abajo
+            boolean valida = true;
+            int col = y;
+            //for para ir en diagonal hacia arriba
+            for(int i = x; i>=0; i--){
+                this.tablero[i][col].invertirColor();
+            }
         }
         private Bar[][] generarTableroRandom(int filas, int columnas, int nivel, boolean color){
             Bar[][] matriz = new Bar[filas][columnas];
