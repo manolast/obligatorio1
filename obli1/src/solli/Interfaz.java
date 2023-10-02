@@ -21,6 +21,8 @@ public class Interfaz {
             int y = in.nextInt();
             String resp = juego.hacerCambiosTablero(x,y);
             System.out.println(resp);
+            System.out.println(juego.toString());
+
             
         }
         

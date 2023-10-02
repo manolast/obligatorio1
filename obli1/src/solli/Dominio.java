@@ -33,6 +33,19 @@ public class Dominio {
             boolean color = this.getColor();
             this.setColor(!color);
         }
+        @Override
+        public String toString(){
+            char symb = this.getSymbol();
+            Boolean col = this.getColor();
+            String ret = "";
+            if(col){
+                ret = "\u001B[34m"+symb+"\u001B[0m";
+            }else{
+                ret = "\u001B[31m"+symb+"\u001B[0m";
+            }
+            return ret;
+        }
+        
     }
     public static class Juego {
         private Bar[][] tablero;
@@ -98,8 +111,18 @@ public class Dominio {
             boolean valida = true;
             int col = y;
             //for para ir en diagonal hacia arriba
-            for(int i = x; i>=0; i--){
+            for(int i = x; i>=0 && valida; i--){
                 this.tablero[i][col].invertirColor();
+                col --;
+                valida = this.esCoordenadaValida(i - 1, col);
+            }
+            col = y+1;
+            valida = this.esCoordenadaValida(x+1, col);
+            //for para ir en diagonal hacia abajo
+            for(int i = x+1; i<this.tablero.length && valida; i++){
+                this.tablero[i][col].invertirColor();
+                col ++;
+                valida = this.esCoordenadaValida(i + 1, col);
             }
         }
         private Bar[][] generarTableroRandom(int filas, int columnas, int nivel, boolean color){
@@ -148,7 +171,7 @@ public class Dominio {
                 this.movimientosInicial.add(movimiento);
             }
         }
-       private Bar generarTableroPredet(){
+       private Bar[][] generarTableroPredet(){
             Bar[][] matriz = new Bar[5][6];
 
             matriz[0][0] = new Bar('|', true);
@@ -186,8 +209,20 @@ public class Dominio {
             matriz[4][4] = new Bar('/', true);
             matriz[4][5] = new Bar('\\', true);
             
-            
+            return matriz;
         }      
+        @Override
+        public String toString(){
+            String ret = "";
+            for(int i = 0; i< this.tablero.length; i++){
+                for(int j = 0; j< this.tablero[0].length; j++){
+                    String barString = this.tablero[i][j].toString();
+                    ret += barString;
+                }
+                ret += '\n';
+            }
+            return ret;
+        }
     }
     
 }
