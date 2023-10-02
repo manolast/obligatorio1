@@ -25,6 +25,11 @@ public class Interfaz {
         }
         
     }
+    public static void jugarPredefinido(){
+        Dominio.Juego juego = new Dominio.Juego();
+        Dominio.Bar[][] tableroPredefinido = juego.generarTableroPredet();
+        
+    }
     
     public static void start() { // Changed from non-static to static
         Scanner in = new Scanner(System.in);

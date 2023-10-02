@@ -148,7 +148,7 @@ public class Dominio {
                 this.movimientosInicial.add(movimiento);
             }
         }
-       private Bar generarTableroPredet(){
+       private Bar[][] generarTableroPredet(){
             Bar[][] matriz = new Bar[5][6];
 
             matriz[0][0] = new Bar('|', true);
@@ -186,7 +186,7 @@ public class Dominio {
             matriz[4][4] = new Bar('/', true);
             matriz[4][5] = new Bar('\\', true);
             
-            
+            return matriz;
         }      
     }
     
