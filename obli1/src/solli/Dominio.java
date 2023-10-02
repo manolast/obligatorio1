@@ -215,6 +215,7 @@ public class Dominio {
             return ret;
         }
         private void desSolucionar(int nivel){
+            //funciona perfecto, falta asegurarse de que no haga y deshaga
             Random random = new Random();
             int filas = this.tablero.length;
             int columnas = this.tablero[0].length;
@@ -265,7 +266,17 @@ public class Dominio {
             matriz[4][5] = new Bar('\\', true);
             
             return matriz;
-        }      
+        }
+        public boolean estaSolucionada(){
+            boolean color = this.tablero[0][0].getColor();
+            boolean soluc = true;
+            for(int i = 0; i < this.tablero.length && soluc; i++) {
+                for (int j = 0; j < this.tablero[0].length && soluc; j++) {
+                    soluc = color == this.tablero[i][j].getColor();
+                }
+            }
+            return soluc;
+        }
         @Override
         public String toString(){
             String ret = "";

@@ -22,14 +22,16 @@ public class Interfaz {
     public static void empezarJuego(Juego juego){
         System.out.print(juego.toString());
         Scanner in = new Scanner(System.in);
-
-        for (int i = 0; i < 4; i++) {
+        
+        boolean solucionada = false;
+        while(!solucionada){
             System.out.println("ingrese movimiento");
             int x = in.nextInt();
             int y = in.nextInt();
             String resp = juego.hacerCambiosTablero(x-1,y-1);
             System.out.println(resp);
             System.out.println(juego.toString());
+            solucionada = juego.estaSolucionada();
         }
     }
 
