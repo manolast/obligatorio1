@@ -88,9 +88,9 @@ public class Dominio {
                         char barra = elemento.charAt(0);
                         char color = elemento.charAt(1);
                         Boolean boolColor;
-                        if(color == 'R'){
+                        if (color == 'R') {
                             boolColor = false;
-                        }else{
+                        } else {
                             boolColor = true;
                         }
                         matriz[i][j] = new Bar(barra, boolColor);
@@ -154,7 +154,7 @@ public class Dominio {
                 }
 
             }
-            return ret;
+            return ret + "\n" + this.toString();
         }
 
         public void hacerMovimientoBackslash(int x, int y) {
@@ -337,11 +337,18 @@ public class Dominio {
         public String toString() {
             String ret = "";
             int numColumnas = this.tablero[0].length;
+            String linea1 = " ";
+            for (int i = 1; i <= numColumnas; i++) {
+                linea1 += "   " + i;
+            }
+            ret += linea1 + "\n";
             for (int i = 0; i < (this.tablero.length * 2) + 1; i++) {
                 if (i % 2 == 0) {
-                    String lineas = "+---".repeat(numColumnas) + "+";
+                    String lineas = "  " + "+---".repeat(numColumnas) + "+";
                     ret += lineas;
                 } else {
+                    String numeroFila = "" + (((i - 1) / 2) + 1) + " ";
+                    ret += numeroFila;
                     for (int j = 0; j < this.tablero[0].length; j++) {
                         String barString = this.tablero[(i - 1) / 2][j].toString();
                         ret += "| " + barString + " ";
