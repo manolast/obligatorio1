@@ -5,6 +5,16 @@ import solli.Dominio.*;
 
 public class Interfaz {
     
+    public static void jugarDatosArchivo(){
+        Juego juego = new Juego(true);
+        empezarJuego(juego);
+    }
+    
+    public static void jugarPredefinido(){
+        Juego juego = new Juego();
+        empezarJuego(juego);
+    }
+    
     public static void jugarAzar(){
         Scanner in = new Scanner(System.in);
         System.out.println("ingrese filas");
@@ -17,7 +27,6 @@ public class Interfaz {
         Juego juego = new Juego(filas, columnas, nivel);
         empezarJuego(juego);
 
-        
     }
     public static void empezarJuego(Juego juego){
         System.out.print(juego.toString());
@@ -64,10 +73,10 @@ public class Interfaz {
         String opcion = in.nextLine();
         switch(opcion){
             case "a":
-                // Call jugarDatosArchivo() or implement this method
+                jugarDatosArchivo();
                 break;
             case "b":
-                // Call jugarPredefinido() or implement this method
+                jugarPredefinido();
                 break;
             case "c":
                 jugarAzar();
