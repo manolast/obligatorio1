@@ -273,11 +273,15 @@ public class Dominio {
             int filas = this.tablero.length;
             int columnas = this.tablero[0].length;
             for (int i = 0; i < nivel; i++) {
-                int opcionFilas = random.nextInt(filas - 1);
-                int opcionColumna = random.nextInt(columnas - 1);
+                int opcionFilas = random.nextInt(filas);
+                int opcionColumna = random.nextInt(columnas);
                 hacerCambiosTablero(opcionFilas, opcionColumna);
                 int[] movimiento = {opcionFilas, opcionColumna};
                 this.movimientosInicial.add(movimiento);
+            }
+            if(this.estaSolucionada()){
+                this.movimientosInicial.clear();
+                desSolucionar(nivel);
             }
         }
 

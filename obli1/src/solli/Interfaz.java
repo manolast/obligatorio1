@@ -82,6 +82,8 @@ public class Interfaz {
                 solucionada = juego.estaSolucionada();
             }
         }
+        System.out.println("Juego terminado!");
+        start();
     }
 
     public static String[] pedirMovimiento() {
