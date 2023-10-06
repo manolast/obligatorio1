@@ -1,5 +1,6 @@
 package solli;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import solli.Dominio.*;
@@ -34,7 +35,6 @@ public class Interfaz {
         empezarJuego(juego);
 
     }
-
     public static int pedirNumero() {
         Scanner scanner = new Scanner(System.in);
         int numero = 0;
@@ -70,7 +70,8 @@ public class Interfaz {
                         break;
                     case "S":
                         System.out.println("Mostrando solucion");
-//                        juego.solucionar();
+                        String solucion = juego.solucionar();
+                        System.out.println(solucion);
                         break;
                     default:
                         System.out.println("paso algo raro");

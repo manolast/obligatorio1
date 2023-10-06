@@ -125,7 +125,7 @@ public class Dominio {
         private boolean esCoordenadaValida(int x, int y) {
             return x >= 0 && x < tablero.length && y >= 0 && y < tablero[0].length;
         }
-
+        
         public String hacerCambiosTablero(int x, int y) {
             String ret = "";
             if (!esCoordenadaValida(x, y)) {
@@ -265,6 +265,29 @@ public class Dominio {
                     break;
             }
             return ret;
+        }
+        public String solucionar() {
+            ArrayList<int[]> movimientosTotales = new ArrayList<>();
+            
+            String resp = "";
+
+            // Recorre la primera lista y agrega sus elementos a la lista combinada
+            for (int[] elemento : movimientos) {
+                movimientosTotales.add(elemento);
+            }
+
+            // Recorre la segunda lista y agrega sus elementos a la lista combinada
+            for (int[] elemento : movimientosInicial) {
+                movimientosTotales.add(elemento);
+            }
+            for (int[] elemento : movimientosTotales){
+                String coordenadas;
+                int fila = elemento[0];
+                int columna = elemento[1];
+                coordenadas = string.format("(%d, %d)", fila, columna); 
+                resp = resp + " " + coordenadas;
+            }
+            return resp;
         }
 
         private void desSolucionar(int nivel) {
