@@ -23,11 +23,11 @@ public class Interfaz {
     public static void jugarAzar() {
         Scanner in = new Scanner(System.in);
         System.out.println("ingrese filas");
-        int filas = pedirNumero();
+        int filas = pedirNumero(3, 9);
         System.out.println("ingrese columnas");
-        int columnas = pedirNumero();
+        int columnas = pedirNumero(3, 9);
         System.out.println("ingrese nivel");
-        int nivel = pedirNumero();
+        int nivel = pedirNumero(1, 8);
 
         Juego juego = new Juego(filas, columnas, nivel);
         System.out.print(juego.toString());
@@ -35,7 +35,8 @@ public class Interfaz {
         empezarJuego(juego);
 
     }
-    public static int pedirNumero() {
+
+    public static int pedirNumero(int min, int max) {
         Scanner scanner = new Scanner(System.in);
         int numero = 0;
         boolean entradaValida = false;
@@ -43,7 +44,11 @@ public class Interfaz {
         while (!entradaValida) {
             try {
                 numero = scanner.nextInt();
-                entradaValida = true;
+                if(numero>=min && numero <= max){
+                    entradaValida = true;
+                }else{
+                    System.out.println("No válido. Debe ser un entero entre "+ min + " y "+ max + " inclusive.");
+                }
             } catch (InputMismatchException e) {
                 System.out.println("ingrese un número entero válido.");
                 scanner.nextLine();
@@ -55,14 +60,14 @@ public class Interfaz {
 
     public static void empezarJuego(Juego juego) {
         boolean solucionada = juego.estaSolucionada();
-        while (!solucionada) {
+        boolean terminada = false;
+        while (!solucionada && !terminada) {
             String[] movimiento = pedirMovimiento();
             if (movimiento.length == 1) {
                 switch (movimiento[0]) {
                     case "X":
                         System.out.println("terminado el juego");
-                        solucionada = true;
-                        start();
+                        terminada = true;
                         break;
                     case "H":
                         System.out.println("mostrando historial");
@@ -80,12 +85,19 @@ public class Interfaz {
             } else {
                 int numeroX = Integer.parseInt(movimiento[0]);
                 int numeroY = Integer.parseInt(movimiento[1]);
-                String resp = juego.hacerCambiosTablero(numeroX - 1, numeroY - 1);
+                String resp = juego.hacerCambiosTablero(numeroX, numeroY, false);
                 System.out.println(resp);
                 solucionada = juego.estaSolucionada();
             }
         }
-        System.out.println("Juego terminado!");
+        if(solucionada){
+            long fin = System.currentTimeMillis();
+            long inicio = juego.getTiempoInicio();
+            long tiempoTranscurrido = fin - inicio;
+            double tiempoSegundos = tiempoTranscurrido / 1000.0;
+            System.out.println("Juego terminado! Tiempo de resolución: "+ tiempoSegundos + " segundos.");
+
+        }
         start();
     }
 

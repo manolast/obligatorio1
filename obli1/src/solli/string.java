@@ -9,9 +9,6 @@ package solli;
  * @author nicol
  */
 class string {
-
-    static String format(String d_d, int fila, int columna) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
     
 }
