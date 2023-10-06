@@ -59,6 +59,7 @@ public class Dominio {
         private int level;
         private ArrayList<int[]> movimientosInicial;
         private ArrayList<int[]> movimientos;
+        private long tiempoInicio;
 
         //constructor con 3 params genera aleatorio por nivel
         public Juego(int rows, int columns, int level) {
@@ -69,7 +70,8 @@ public class Dominio {
             this.tablero = generarTableroRandom(rows, columns, level, randomBoolean);
             this.movimientosInicial = new ArrayList<int[]>();
             desSolucionar(level);
-
+            this.tiempoInicio = System.currentTimeMillis();
+            this.movimientos = new ArrayList<int[]>();
         }
 
         public Juego(Boolean txt) {
@@ -109,52 +111,86 @@ public class Dominio {
             } catch (FileNotFoundException e) {
                 matriz = new Bar[0][0];
             }
+            this.tiempoInicio = System.currentTimeMillis();
+            this.movimientos = new ArrayList<int[]>();
+
         }
 
         public Juego() {
             this.level = 3;
             this.tablero = generarTableroPredet();
+            this.tiempoInicio = System.currentTimeMillis();
+            this.movimientosInicial = new ArrayList<int[]>();
+            int[] pareja1 = {5, 4};
+            int[] pareja2 = {5, 6};
+            int[] pareja3 = {4, 4};
 
+            movimientosInicial.add(pareja1);
+            movimientosInicial.add(pareja2);
+            movimientosInicial.add(pareja3);
+            this.movimientos = new ArrayList<int[]>();
         }
 
         public void agregarMovimiento(int x, int y) {
             int[] coordenadas = {x, y};
-            movimientos.add(coordenadas);
+            this.movimientos.add(coordenadas);
         }
 
         private boolean esCoordenadaValida(int x, int y) {
             return x >= 0 && x < tablero.length && y >= 0 && y < tablero[0].length;
         }
 
-        public String hacerCambiosTablero(int x, int y) {
+        public String hacerCambiosTablero(int x, int y, boolean esGenerarAleatorio) {
             String ret = "";
-            if (!esCoordenadaValida(x, y)) {
+            if(x == -1 && y == -1){
+                if(this.movimientos.size() > 0){
+                    int ultimoIndice = this.movimientos.size() - 1;
+                    int[] ultimoElemento = this.movimientos.remove(ultimoIndice);
+                    ret = this.hacerCambiosTablero(ultimoElemento[0], ultimoElemento[1], false);
+                    //elimino el movimiento que se agrega al arraylist al llamarse a si misma
+                    this.movimientos.remove(ultimoIndice);
+                }else{
+                    ret = "No hay movimientos para ir hacia atras";
+                }
+            }else if (!esCoordenadaValida(x - 1, y - 1)) {
                 ret = "Coordenada no valida, ingrese una valida";
             } else {
+                //reduzco uno las coordenadas para hacer los cambios en la matriz
+                x--;
+                y--;
                 char barra = tablero[x][y].getSymbol();
                 switch (barra) {
                     case '\\' -> {
                         ret = "es una c \\";
                         hacerMovimientoBackslash(x, y);
+                        break;
                     }
                     case '/' -> {
                         ret = "es una /";
                         hacerMovimientoFrontslash(x, y);
+                        break;
                     }
                     case '|' -> {
                         ret = "es una |";
                         hacerMovimientoRecta(x, y);
+                        break;
                     }
                     case '-' -> {
                         ret = "es una -";
                         hacerMovimientoGuion(x, y);
+                        break;
                     }
-                    default ->
+                    default -> {
                         ret = "que carajo paso";
+                        break;
+                    }
                 }
-
+                ret+= this.toString();
+                if(!esGenerarAleatorio){
+                    this.agregarMovimiento(x, y);
+                }
             }
-            return ret + "\n" + this.toString();
+            return ret;
         }
 
         public void hacerMovimientoBackslash(int x, int y) {
@@ -247,23 +283,13 @@ public class Dominio {
             char ret = 'd';
             Random random = new Random();
             int opcion = random.nextInt(4) + 1;
-            switch (opcion) {
-                case 1:
-                    ret = '\\';
-                    break;
-                case 2:
-                    ret = '/';
-                    break;
-                case 3:
-                    ret = '|';
-                    break;
-                case 4:
-                    ret = '-';
-                    break;
-                default:
-                    ret = '-';
-                    break;
-            }
+            ret = switch (opcion) {
+                case 1 -> '\\';
+                case 2 -> '/';
+                case 3 -> '|';
+                case 4 -> '-';
+                default -> '-';
+            };
             return ret;
         }
 
@@ -275,7 +301,7 @@ public class Dominio {
             for (int i = 0; i < nivel; i++) {
                 int opcionFilas = random.nextInt(filas);
                 int opcionColumna = random.nextInt(columnas);
-                hacerCambiosTablero(opcionFilas, opcionColumna);
+                hacerCambiosTablero(opcionFilas, opcionColumna, true);
                 int[] movimiento = {opcionFilas, opcionColumna};
                 this.movimientosInicial.add(movimiento);
             }
@@ -364,5 +390,11 @@ public class Dominio {
             }
             return ret;
         }
+
+        public long getTiempoInicio() {
+            return tiempoInicio;
+        }
+
+        
     }
 }
