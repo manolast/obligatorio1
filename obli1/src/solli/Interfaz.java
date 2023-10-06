@@ -1,5 +1,6 @@
 package solli;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import solli.Dominio.*;
@@ -75,8 +76,8 @@ public class Interfaz {
                         break;
                     case "S":
                         System.out.println("Mostrando solucion");
-//                        String solucion = juego.solucionar();
-                        
+                        String solucion = juego.solucionar();
+                        System.out.println(solucion);
                         break;
                     default:
                         System.out.println("paso algo raro");

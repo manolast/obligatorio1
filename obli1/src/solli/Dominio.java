@@ -162,27 +162,23 @@ public class Dominio {
                 char barra = tablero[x][y].getSymbol();
                 switch (barra) {
                     case '\\' -> {
-                        ret = "es una c \\";
                         hacerMovimientoBackslash(x, y);
                         break;
                     }
                     case '/' -> {
-                        ret = "es una /";
                         hacerMovimientoFrontslash(x, y);
                         break;
                     }
                     case '|' -> {
-                        ret = "es una |";
                         hacerMovimientoRecta(x, y);
                         break;
                     }
                     case '-' -> {
-                        ret = "es una -";
                         hacerMovimientoGuion(x, y);
                         break;
                     }
                     default -> {
-                        ret = "que carajo paso";
+                        ret = "hubo un problema";
                         break;
                     }
                 }
@@ -297,6 +293,29 @@ public class Dominio {
                     '-';
             };
             return ret;
+        }
+        public String solucionar() {
+            ArrayList<int[]> movimientosTotales = new ArrayList<>();
+            
+            String resp = "";
+
+            // Recorre la primera lista y agrega sus elementos a la lista combinada
+            for (int[] elemento : movimientos) {
+                movimientosTotales.add(elemento);
+            }
+
+            // Recorre la segunda lista y agrega sus elementos a la lista combinada
+            for (int[] elemento : movimientosInicial) {
+                movimientosTotales.add(elemento);
+            }
+            for (int[] elemento : movimientosTotales){
+                String coordenadas;
+                int fila = elemento[0];
+                int columna = elemento[1];
+                coordenadas = "(" + fila + ", " + columna + ")"; 
+                resp = resp + " " + coordenadas;
+            }
+            return resp;
         }
 
         private void desSolucionar(int nivel) {
