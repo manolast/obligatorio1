@@ -295,26 +295,20 @@ public class Dominio {
             return ret;
         }
         public String solucionar() {
-            ArrayList<int[]> movimientosTotales = new ArrayList<>();
-            
             String resp = "";
-
-            // Recorre la primera lista y agrega sus elementos a la lista combinada
+            
             for (int[] elemento : movimientos) {
-                movimientosTotales.add(elemento);
+                int fila = elemento[0] + 1;
+                int columna = elemento[1] + 1;
+                String coordenadas = "(" + fila + ", " + columna + ")";
+                resp = resp + coordenadas;
             }
 
-            // Recorre la segunda lista y agrega sus elementos a la lista combinada
             for (int[] elemento : movimientosInicial) {
-                movimientosTotales.add(elemento);
+                String coordenadas = "(" + elemento[0] + ", " + elemento[1] + ")";
+                resp = resp + coordenadas;
             }
-            for (int[] elemento : movimientosTotales){
-                String coordenadas;
-                int fila = elemento[0];
-                int columna = elemento[1];
-                coordenadas = "(" + fila + ", " + columna + ")"; 
-                resp = resp + " " + coordenadas;
-            }
+
             return resp;
         }
 
