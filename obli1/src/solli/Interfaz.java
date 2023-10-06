@@ -1,6 +1,5 @@
 package solli;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import solli.Dominio.*;
