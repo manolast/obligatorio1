@@ -7,16 +7,18 @@ import static solli.Interfaz.empezarJuego;
 
 public class Interfaz {
 
-    public static void jugarDatosArchivo(){
+    public static void jugarDatosArchivo() {
         Juego juego = new Juego(true);
+        System.out.print(juego.toString());
         empezarJuego(juego);
     }
-    
-    public static void jugarPredefinido(){
+
+    public static void jugarPredefinido() {
         Juego juego = new Juego();
+        System.out.print(juego.toString());
         empezarJuego(juego);
     }
-    
+
     public static void jugarAzar() {
         Scanner in = new Scanner(System.in);
         System.out.println("ingrese filas");
@@ -74,7 +76,7 @@ public class Interfaz {
                         System.out.println("paso algo raro");
                         break;
                 }
-            }else{
+            } else {
                 int numeroX = Integer.parseInt(movimiento[0]);
                 int numeroY = Integer.parseInt(movimiento[1]);
                 String resp = juego.hacerCambiosTablero(numeroX - 1, numeroY - 1);
