@@ -70,7 +70,8 @@ public class Interfaz {
                         break;
                     case "H":
                         System.out.println("mostrando historial");
-//                        juego.mostrarHistorial();
+                        String hist = juego.devolverHistorial();
+                        System.out.println(hist);
                         break;
                     case "S":
                         System.out.println("Mostrando solucion");
