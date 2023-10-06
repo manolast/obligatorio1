@@ -142,17 +142,18 @@ public class Dominio {
 
         public String hacerCambiosTablero(int x, int y, boolean esGenerarAleatorio) {
             String ret = "";
-            if(x == -1 && y == -1){
-                if(this.movimientos.size() > 0){
+            if (x == -1 && y == -1) {
+                if (this.movimientos.size() > 0) {
                     int ultimoIndice = this.movimientos.size() - 1;
                     int[] ultimoElemento = this.movimientos.remove(ultimoIndice);
                     ret = this.hacerCambiosTablero(ultimoElemento[0], ultimoElemento[1], false);
                     //elimino el movimiento que se agrega al arraylist al llamarse a si misma
-                    this.movimientos.remove(ultimoIndice);
-                }else{
+                    int ultimoIndice2 = this.movimientos.size() - 1;
+                    this.movimientos.remove(ultimoIndice2);
+                } else {
                     ret = "No hay movimientos para ir hacia atras";
                 }
-            }else if (!esCoordenadaValida(x - 1, y - 1)) {
+            } else if (!esCoordenadaValida(x - 1, y - 1)) {
                 ret = "Coordenada no valida, ingrese una valida";
             } else {
                 //reduzco uno las coordenadas para hacer los cambios en la matriz
@@ -185,8 +186,8 @@ public class Dominio {
                         break;
                     }
                 }
-                ret+= this.toString();
-                if(!esGenerarAleatorio){
+                ret += this.toString();
+                if (!esGenerarAleatorio) {
                     this.agregarMovimiento(x, y);
                 }
             }
@@ -284,11 +285,16 @@ public class Dominio {
             Random random = new Random();
             int opcion = random.nextInt(4) + 1;
             ret = switch (opcion) {
-                case 1 -> '\\';
-                case 2 -> '/';
-                case 3 -> '|';
-                case 4 -> '-';
-                default -> '-';
+                case 1 ->
+                    '\\';
+                case 2 ->
+                    '/';
+                case 3 ->
+                    '|';
+                case 4 ->
+                    '-';
+                default ->
+                    '-';
             };
             return ret;
         }
@@ -299,13 +305,13 @@ public class Dominio {
             int filas = this.tablero.length;
             int columnas = this.tablero[0].length;
             for (int i = 0; i < nivel; i++) {
-                int opcionFilas = random.nextInt(filas);
-                int opcionColumna = random.nextInt(columnas);
+                int opcionFilas = random.nextInt(filas) + 1;
+                int opcionColumna = random.nextInt(columnas) + 1;
                 hacerCambiosTablero(opcionFilas, opcionColumna, true);
                 int[] movimiento = {opcionFilas, opcionColumna};
                 this.movimientosInicial.add(movimiento);
             }
-            if(this.estaSolucionada()){
+            if (this.estaSolucionada()) {
                 this.movimientosInicial.clear();
                 desSolucionar(nivel);
             }
@@ -391,10 +397,20 @@ public class Dominio {
             return ret;
         }
 
+        public String devolverHistorial() {
+            String ret = "";
+            if(this.movimientos.size() > 0){
+                for (int[] pareja : this.movimientos) {
+                    ret += "( " + pareja[0] + ", " + pareja[1] + " )";
+                }
+            }else{
+                ret = "No hay historial para mostrar";
+            }
+            return ret;
+        }
+
         public long getTiempoInicio() {
             return tiempoInicio;
         }
-
-        
     }
 }
