@@ -141,6 +141,7 @@ public class Dominio {
         }
 
         public String hacerCambiosTablero(int x, int y, boolean esGenerarAleatorio) {
+            String previa = this.toString();
             String ret = "";
             if (x == -1 && y == -1) {
                 if (this.movimientos.size() > 0) {
@@ -182,7 +183,12 @@ public class Dominio {
                         break;
                     }
                 }
-                ret += this.toString();
+                String[] previaArray = previa.split("\n");
+                String[] actualArray = this.toString().split("\n");
+                ret+=previaArray[0] + "         "+ actualArray[0];
+                for(int i = 1; i < actualArray.length; i++) {
+                    ret+="\n"+previaArray[i] + "  ==>  "+ actualArray[i];
+                }
                 if (!esGenerarAleatorio) {
                     this.agregarMovimiento(x, y);
                 }
@@ -305,7 +311,7 @@ public class Dominio {
             }
 
             for (int[] elemento : movimientosInicial) {
-                String coordenadas = "(" + elemento[0] + ", " + elemento[1] + ")";
+                String coordenadas = "(" + (elemento[0]) + ", " + (elemento[1]) + ")";
                 resp = resp + coordenadas;
             }
 
@@ -414,7 +420,7 @@ public class Dominio {
             String ret = "";
             if(this.movimientos.size() > 0){
                 for (int[] pareja : this.movimientos) {
-                    ret += "( " + pareja[0] + ", " + pareja[1] + " )";
+                    ret += "( " + (pareja[0]+1) + ", " + (pareja[1]+1) + " )";
                 }
             }else{
                 ret = "No hay historial para mostrar";
