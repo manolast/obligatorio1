@@ -147,7 +147,7 @@ public class Dominio {
                 if (this.movimientos.size() > 0) {
                     int ultimoIndice = this.movimientos.size() - 1;
                     int[] ultimoElemento = this.movimientos.remove(ultimoIndice);
-                    ret = this.hacerCambiosTablero(ultimoElemento[0], ultimoElemento[1], false);
+                    ret = this.hacerCambiosTablero(ultimoElemento[0] + 1, ultimoElemento[1] + 1, false);
                     //elimino el movimiento que se agrega al arraylist al llamarse a si misma
                     int ultimoIndice2 = this.movimientos.size() - 1;
                     this.movimientos.remove(ultimoIndice2);
