@@ -69,12 +69,10 @@ public class Interfaz {
                         terminada = true;
                         break;
                     case "H":
-                        System.out.println("mostrando historial");
                         String hist = juego.devolverHistorial();
                         System.out.println(hist);
                         break;
                     case "S":
-                        System.out.println("Mostrando solucion");
                         String solucion = juego.solucionar();
                         System.out.println(solucion);
                         break;
@@ -113,17 +111,14 @@ public class Interfaz {
         if (inputArray.length == 1) {
             switch (inputArray[0]) {
                 case "X":
-                    System.out.println("terminado el juego");
                     ret = new String[1];
                     ret[0] = "X";
                     break;
                 case "H":
-                    System.out.println("mostrando historial");
                     ret = new String[1];
                     ret[0] = "H";
                     break;
                 case "S":
-                    System.out.println("Mostrando solucion");
                     ret = new String[1];
                     ret[0] = "S";
                     break;

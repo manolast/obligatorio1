@@ -301,7 +301,7 @@ public class Dominio {
             return ret;
         }
         public String solucionar() {
-            String resp = "";
+            String resp = "Solucion: ";
             
             for (int[] elemento : movimientos) {
                 int fila = elemento[0] + 1;
@@ -419,6 +419,7 @@ public class Dominio {
         public String devolverHistorial() {
             String ret = "";
             if(this.movimientos.size() > 0){
+                ret+= "Historial: ";
                 for (int[] pareja : this.movimientos) {
                     ret += "( " + (pareja[0]+1) + ", " + (pareja[1]+1) + " )";
                 }
