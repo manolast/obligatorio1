@@ -43,10 +43,10 @@ public class Interfaz {
         while (!entradaValida) {
             try {
                 numero = scanner.nextInt();
-                if(numero>=min && numero <= max){
+                if (numero >= min && numero <= max) {
                     entradaValida = true;
-                }else{
-                    System.out.println("No válido. Debe ser un entero entre "+ min + " y "+ max + " inclusive.");
+                } else {
+                    System.out.println("No válido. Debe ser un entero entre " + min + " y " + max + " inclusive.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("ingrese un número entero válido.");
@@ -57,13 +57,32 @@ public class Interfaz {
         return numero;
     }
 
+    public static int pedirColumna() {
+        Scanner scanner = new Scanner(System.in);
+        int numero = 0;
+        System.out.println("ingrese columna");
+        boolean entradaValida = false;
+
+        while (!entradaValida) {
+            try {
+                numero = scanner.nextInt();
+                entradaValida = true;
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("ingrese un número entero válido.");
+                scanner.nextLine();
+            }
+        }
+        return numero;
+    }
+
     public static void empezarJuego(Juego juego) {
         boolean solucionada = juego.estaSolucionada();
         boolean terminada = false;
         while (!solucionada && !terminada) {
-            String[] movimiento = pedirMovimiento();
-            if (movimiento.length == 1) {
-                switch (movimiento[0]) {
+            String[] movimiento1 = pedirComandoOFila();
+            if (movimiento1.length == 1) {
+                switch (movimiento1[0]) {
                     case "X":
                         System.out.println("terminado el juego");
                         terminada = true;
@@ -77,26 +96,64 @@ public class Interfaz {
                         System.out.println(solucion);
                         break;
                     default:
-                        System.out.println("paso algo raro");
+                        System.out.println("PASO ALGO RARISIMO.");
                         break;
                 }
             } else {
-                int numeroX = Integer.parseInt(movimiento[0]);
-                int numeroY = Integer.parseInt(movimiento[1]);
+                int numeroX = Integer.parseInt(movimiento1[0]);
+                int numeroY = pedirColumna();
                 String resp = juego.hacerCambiosTablero(numeroX, numeroY, false);
                 System.out.println(resp);
                 solucionada = juego.estaSolucionada();
             }
         }
-        if(solucionada){
+        if (solucionada) {
             long fin = System.currentTimeMillis();
             long inicio = juego.getTiempoInicio();
             long tiempoTranscurrido = fin - inicio;
             double tiempoSegundos = tiempoTranscurrido / 1000.0;
-            System.out.println("Juego terminado! Tiempo de resolución: "+ tiempoSegundos + " segundos.");
+            System.out.println("Juego terminado! Tiempo de resolución: " + tiempoSegundos + " segundos.");
 
         }
         start();
+    }
+
+    public static String[] pedirComandoOFila() {
+        Scanner in = new Scanner(System.in);
+        String[] ret;
+        System.out.println("Ingrese comando o fila");
+        String input = in.nextLine();
+        try {
+            int numero1 = Integer.parseInt(input);
+            ret = new String[2];
+            ret[0] = "" + numero1;
+            ret[1] = "placeholder";
+        } catch (NumberFormatException e) {
+            if (input.length() > 1) {
+                System.out.println("opcion no valida");
+                ret = pedirComandoOFila();
+            } else {
+                switch (input) {
+                    case "X":
+                        ret = new String[1];
+                        ret[0] = "X";
+                        break;
+                    case "H":
+                        ret = new String[1];
+                        ret[0] = "H";
+                        break;
+                    case "S":
+                        ret = new String[1];
+                        ret[0] = "S";
+                        break;
+                    default:
+                        System.out.println("opcion no valida");
+                        ret = pedirComandoOFila();
+                        break;
+                }
+            }
+        }
+        return ret;
     }
 
     public static String[] pedirMovimiento() {
@@ -187,6 +244,7 @@ public class Interfaz {
     }
 
     public static void main(String[] args) {
+        System.out.println("Bienvenido a Solliflips! El mejor juego solitario del planeta");
         start(); // Call the static start() method
     }
 }
