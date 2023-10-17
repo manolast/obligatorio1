@@ -1,3 +1,4 @@
+//Material elaborado por Manuel Stapff (303636) y Nicolas Piriz (310896)
 package solli;
 
 import java.io.File;
@@ -131,7 +132,7 @@ public class Dominio {
             this.movimientos = new ArrayList<int[]>();
         }
 
-        public void agregarMovimiento(int x, int y) {
+        private void agregarMovimiento(int x, int y) {
             int[] coordenadas = {x, y};
             this.movimientos.add(coordenadas);
         }
@@ -196,7 +197,7 @@ public class Dominio {
             return ret;
         }
 
-        public void hacerMovimientoBackslash(int x, int y) {
+        private void hacerMovimientoBackslash(int x, int y) {
             //primero voy diagonal para arriba, luego diagonal para abajo
             boolean valida = true;
             int col = y;
@@ -216,7 +217,7 @@ public class Dominio {
             }
         }
 
-        public void hacerMovimientoFrontslash(int x, int y) {
+        private void hacerMovimientoFrontslash(int x, int y) {
             //primero voy diagonal para arriba, luego diagonal para abajo
             boolean valida = true;
             int col = y;
@@ -236,7 +237,7 @@ public class Dominio {
             }
         }
 
-        public void hacerMovimientoRecta(int x, int y) {
+        private void hacerMovimientoRecta(int x, int y) {
             //primero voy para arriba, luego abajo
             boolean valida = true;
             int col = y;
@@ -253,7 +254,7 @@ public class Dominio {
             }
         }
 
-        public void hacerMovimientoGuion(int x, int y) {
+        private void hacerMovimientoGuion(int x, int y) {
             //primero voy para izquierda, luego derecha
             boolean valida = true;
             int fila = x;

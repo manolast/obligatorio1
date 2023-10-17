@@ -1,3 +1,4 @@
+//Material elaborado por Manuel Stapff (303636) y Nicolas Piriz (310896)
 package solli;
 
 import java.util.InputMismatchException;
@@ -155,50 +156,6 @@ public class Interfaz {
         }
         return ret;
     }
-
-    public static String[] pedirMovimiento() {
-        System.out.println("ingrese movimiento");
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        String[] ret = new String[2];
-        String[] inputArray = input.split(" ");
-        //si el array tiene largo 1, o es letras o esta mal
-        //si largo 2, o es movimiento de numeros o esta mal
-        //si es largo 3 esta mal
-        if (inputArray.length == 1) {
-            switch (inputArray[0]) {
-                case "X":
-                    ret = new String[1];
-                    ret[0] = "X";
-                    break;
-                case "H":
-                    ret = new String[1];
-                    ret[0] = "H";
-                    break;
-                case "S":
-                    ret = new String[1];
-                    ret[0] = "S";
-                    break;
-                default:
-                    System.out.println("opcion no valida");
-                    ret = pedirMovimiento();
-            }
-        } else if (inputArray.length == 2) {
-            try {
-                int numero1 = Integer.parseInt(inputArray[0]);
-                int numero2 = Integer.parseInt(inputArray[1]);
-                ret = inputArray;
-            } catch (NumberFormatException e) {
-                System.out.println("opcion no valida");
-                ret = pedirMovimiento();
-            }
-        } else {
-            System.out.println("opcion no valida");
-            ret = pedirMovimiento();
-        }
-        return ret;
-    }
-
     public static void start() {
         Scanner in = new Scanner(System.in);
         System.out.println("Desea jugar? (y/n)");
